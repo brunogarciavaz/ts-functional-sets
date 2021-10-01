@@ -1,4 +1,4 @@
-Purely functional sets in TypeScript, inspired by an assigment in the course ["Functional Programming Principles in Scala" by Martin Ordesky](https://www.coursera.org/learn/scala-functional-programming), with a few added features.
+Purely functional sets in TypeScript, inspired by an assigment in the course ["Functional Programming Principles in Scala" by Martin Odersky](https://www.coursera.org/learn/scala-functional-programming), with a few added features.
 
 > Functional representation of sets based on the mathematical notion of
 > characteristic functions. The goal is to gain practice with
