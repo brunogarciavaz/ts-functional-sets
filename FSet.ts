@@ -1,9 +1,14 @@
+/**
+* We represent a set by its characteristic function, i.e.
+* its 'contains' predicate.
+*/
 type FSet = (x: number) => boolean
 
 export default class Set {
     // Indicates whether a set contains a given element.
     static contains = (s: FSet, e: number): boolean => s(e)
     
+    // Returns the set of the one given element.
     static singleton = (e: number): FSet => (x: number) => x===e
 
     // All elements that are in either 's' or 'f'
@@ -24,12 +29,15 @@ export default class Set {
     // Subtracts a given element from a set
     static subtract = (s: FSet, e: number): FSet => Set.diff(s, Set.singleton((e)))
 
+    //Creates set of an specified range
+    static createRange = (a: number, b: number): FSet => Set.intersect((x) => x >= a, (x) => x <= b) 
+
     // Whether all numbers inside a defined bound within 's' that satisfy 'p'
     static forAll = (s: FSet, p: (e: number) => boolean, bound: number): boolean => {
         const iter = (a: number): boolean => {
             if(a > bound) return true
             else if (Set.contains(Set.diff(s, p), a)) return false
-            else iter(a + 1)
+            else return iter(a + 1)
         }
         return iter(-bound)
     }
@@ -44,11 +52,14 @@ export default class Set {
     static toArray = (s: FSet, bound: number): number[] => {
         const iter = (acc: number[], a: number): number[] => {
             if(a > bound) return acc
-            else if(Set.contains(s, a)) iter([...acc, a], a + 1) 
+            else if(Set.contains(s, a)) return iter([...acc, a], a + 1)
+            else return iter(acc, a + 1) 
         }
         return iter([], -bound) 
     }
 }
+
+
 
 
 
